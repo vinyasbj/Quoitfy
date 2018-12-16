@@ -5,7 +5,7 @@ const quoteSchema = new Schema({
         type: String,
         required: true,
         minlength: 4, 
-        maxlength: 150,
+        maxlength: 1000,
     },
     author:{
         type: String,

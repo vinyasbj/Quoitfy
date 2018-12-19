@@ -22,8 +22,22 @@ router.get('/quote', (req, res) => {
 });
 
 router.get('/',(req,res)=>{
-    res.send(Quote.all());
+    Quote.find().populate('quotes').then((quotes)=>{
+        res.send(quotes);
+    }).catch((err)=>{
+        res.send(err);
+    });
 })
+
+router.get('/:id',(req,res)=>{
+    let id = req.params.id
+    Quote.findById(id).then((quote)=>{
+        res.send(quote);
+    }).catch((err)=>{
+        res.send(err);
+    });
+})
+
 
 router.get('/random_quote',(req,res)=>{
     axios.get('https://talaikis.com/api/quotes/random/')
@@ -50,7 +64,7 @@ router.post('/', (req, res) => {
     })
 })
 
-
+// 5c1a699792b1512ea88bd39e
 module.exports = {
     quotesController: router
 }
